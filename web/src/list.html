@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>蓝桥云课-技术社区</title>
+    <meta data-n-head="ssr" charset="utf-8">
+    <link data-n-head="ssr" rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+    <meta data-n-head="ssr" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+    <meta data-n-head="ssr" data-hid="keywords" name="keywords" content="蓝桥云课,IT培训,IT教育,编程,在线编程,Linux,Linux教程,Linux操作系统,Python,Python教程,Python基础教程,Java,Java编程,C语言,大数据,Node.js,Hadoop,PHP,Docker,Git,R,SQL,MongoDB,Redis,Swift,Spark,在线实验,IT在线教育,编程入门,项目训练,项目实践,webIDE,软件开发">
+    <meta data-n-head="ssr" data-hid="description" name="description" itemprop="description" content="蓝桥云课是国内领先的IT在线编程及在线实训学习平台，专业导师提供精选的实践项目，创新的技术使得学习者无需配置繁琐的本地环境，随时在线流畅使用。以就业为导向，
+        提供编程、运维、测试、云计算、大数据、数据库等全面的IT技术动手实践环境，
+        提供Linux、Python、Java、C语言、Node.js、Hadoop、PHP、Docker、Git、
+        R、SQL、MongoDB、Redis、Swift、Spark等千门热门课程。">
+    <link href="../iconfont/iconfont.css" rel="stylesheet" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/index.css" rel="stylesheet" />
+    <link href="../css/blog.css" rel="stylesheet" />
+</head>
+<header id="header" class="navbar navbar-default fixed-top"></header>
+<div class="container">
+    <section class="row">
+        <div class="col-lg-2">
+            <div class="aside">
+                <ul>
+                    <li value="前端" class="active">
+                        前端
+                    </li>
+                    <li value="后端">后端
+                    </li>
+                    <li value="Andriod">
+                        Andriod
+                    </li>
+                    <li value="IOS">
+                        IOS
+                    </li>
+                    <li value="人工智能">
+                        人工智能
+                    </li>
+                    <li value="数据库">
+                        数据库
+                    </li>
+                    <li value="程序开发">
+                        程序开发
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-12">
+            <div class="bloglist">
+
+            </div>
+        </div>
+    </section>
+</div>
+<script src="../js/common.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script>
+    $(function() {    
+        $("#header").load("./header.html", function() {
+            searchinput();
+        });
+
+        $(".aside li").click(function() {
+            //点击类别，设置选中样式
+            let category = $(this);
+            category.addClass("active").siblings().removeClass("active");
+            //根据选择类别动态加载json数据
+            loadlistdata(category.attr("value"));
+        })
+        loadlistdata("前端"); //初始加载数据
+    })
+</script>
+
+</html>

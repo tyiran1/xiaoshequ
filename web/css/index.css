@@ -1,0 +1,398 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #333;
+}
+
+header {
+    position: relative;
+    height: 56px;
+    border: 1px solid #efefef;
+}
+
+.navbar {
+    background-color: #fff;
+    width: 100%;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.logo {
+    width: 160px;
+    height: 42px;
+    background: url("/images/header-logo.svg");
+    background-size: 100% 100%;
+}
+
+.nav {
+    width: 60%;
+    height: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding-right: 9%;
+}
+
+.nav-item {
+    line-height: 43px;
+    padding: 0 15px;
+    font-size: 17px;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+    color: #969696;
+}
+
+.active {
+    color: #2e7eee;
+}
+
+.search {
+    position: relative;
+    float: left;
+}
+
+.search input {
+    width: 200px;
+    height: 38px;
+    outline: 0;
+    border: 0;
+    border-radius: 19px;
+    padding: 0 30px 0 20px;
+    font-size: 14px;
+    background: #eee;
+    box-sizing: border-box;
+    color: #666;
+    transition: width .5s;
+    transition-delay: .1s;
+}
+
+.zoom {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+    .addition {
+        position: absolute;
+        top: 0;
+        right: 30px;
+        height: 56px;
+        color: #969696;
+        
+    }
+
+    .addition2 {
+        position: absolute;
+        top: 0;
+        right: 30px;
+        height: 56px;
+        color: #969696;
+        
+    }
+    .addition button {
+        float: right;
+        margin-top: 9px;
+        line-height: 38px;
+        border-radius: 19px;
+        margin-right: 20px;
+        border: 1px solid #2e7eee;
+        padding: 0 20px;
+        background-color: #fff;
+    }
+    .addition2 .userimg{
+        float: left;
+    
+        margin-top: 9px;
+        line-height: 40px;
+        margin-right: 40px;
+
+    }
+    .addition2 .img{
+        width: 40px; 
+        height: 40px;
+        border-radius: 50%;
+    }
+    .addition2 button {
+        float: left;
+        margin-top: 9px;
+        line-height: 38px;
+        border-radius: 19px;
+        margin-right: 20px;
+        border: 1px solid #2e7eee;
+        padding: 0 20px;
+        background-color: #2e7eee;
+        color: white;
+    }
+    .userNav{
+        width: 100px;
+        /* border:1px solid red; */
+        position: absolute;
+        top:60px;
+        left:100px;
+        display: none;   
+    }
+    .userNav a{
+        text-decoration: none;
+        line-height: 30px;
+     }
+     .userimg:hover .userNav{
+        display: block;
+    }
+    .addition .reg {
+        color: #2e7eee;
+    }
+
+    .addition .writing {
+        background: #2e7eee;
+        color: #fff;
+    }
+
+.list-item {
+    padding: 20px 0;
+    overflow: hidden;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.list-pic {
+    float: right;
+    width: 125px;
+    height: 100px;
+    display: block;
+    border-radius: 4px;
+}
+
+.home {
+    width: 1024px;
+    margin: 0 auto;
+    min-width: 625px;
+    overflow: hidden;
+    padding-top: 50px;
+}
+
+.home-left {
+    float: left;
+    width: 625px;
+    margin-left: 15px;
+    padding-top: 20px;
+}
+
+.pic {
+    width: 604px;
+    height: 216px;
+    border-radius: 8px;
+}
+
+.home-right {
+    float: right;
+    /* width: 280px; */
+    max-width: 625px;
+    margin-left: 15px;
+    margin-top: 20px;
+}
+
+.list-info {
+    width: 70%;
+    float: left;
+}
+
+.title {
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.desc {
+    line-height: 22px;
+    font-size: 13px;
+    color: #999;
+}
+
+@media screen and (max-width: 960px) {
+    .search,
+    .addition {
+        display: none;
+    }
+}
+
+
+/*右侧推荐*/
+
+.recommend img {
+    width: 100%;
+    max-width: 625px;
+    max-height: 120px;
+    min-height: 50px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+}
+
+
+/*推荐作者*/
+
+.hotauthors {
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.hotauthors .title {
+    font-size: 14px;
+    color: #969696;
+    font-weight: normal;
+}
+
+.hotauthors .change {
+    float: right;
+    display: inline-block;
+    font-size: 14px;
+    color: #969696;
+}
+
+.hotauthors .authorslist {
+    margin: 0 0 20px;
+    text-align: left;
+    list-style: none;
+    padding-left: 0;
+}
+
+.hotauthors .authorslist .avatar {
+    float: left;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+}
+
+.hotauthors .list li {
+    margin-top: 15px;
+}
+
+.hotauthors .list .follow {
+    float: right;
+    margin-top: 5px;
+    padding: 0;
+    font-size: 13px;
+    color: #2e7eee;
+}
+
+.hotauthors .authorslist .name {
+    padding-top: 5px;
+    margin-right: 60px;
+    font-size: 14px;
+    text-decoration: none;
+    display: block;
+    color: #333;
+}
+
+.hotauthors .authorslist p {
+    margin-top: 2px;
+    font-size: 12px;
+    color: #969696;
+}

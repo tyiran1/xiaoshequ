@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>登陆蓝桥云课-技术社区</title>
+    <meta data-n-head="ssr" charset="utf-8">
+    <link data-n-head="ssr" rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+    <meta data-n-head="ssr" name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+    <meta data-n-head="ssr" data-hid="keywords" name="keywords"
+        content="蓝桥云课,IT培训,IT教育,编程,在线编程,Linux,Linux教程,Linux操作系统,Python,Python教程,Python基础教程,Java,Java编程,C语言,大数据,Node.js,Hadoop,PHP,Docker,Git,R,SQL,MongoDB,Redis,Swift,Spark,在线实验,IT在线教育,编程入门,项目训练,项目实践,webIDE,软件开发">
+    <meta data-n-head="ssr" data-hid="description" name="description" itemprop="description" content="蓝桥云课是国内领先的IT在线编程及在线实训学习平台，专业导师提供精选的实践项目，创新的技术使得学习者无需配置繁琐的本地环境，随时在线流畅使用。以就业为导向，
+        提供编程、运维、测试、云计算、大数据、数据库等全面的IT技术动手实践环境，
+        提供Linux、Python、Java、C语言、Node.js、Hadoop、PHP、Docker、Git、
+        R、SQL、MongoDB、Redis、Swift、Spark等千门热门课程。">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/login.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="page login-page">
+
+        <div class="container d-flex align-items-center">
+
+            <div class="form-holder has-shadow">
+                <div class="alert alert-danger alert-dismissible fade hide" role="alert">
+                    <strong>提示：</strong> 账号或密码错误！
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="info d-flex align-items-center">
+                            <div class="content">
+                                <div class="logo">
+                                    <h1>欢迎注册蓝桥技术社区</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 bg-white">
+                        <div class="form d-flex align-items-center">
+                            <div class="content">
+                                <form id="loginform" method="post" action="/index.html" class="form-validate"
+                                    id="loginFrom">
+                                    <div class="form-group">
+                                        <input id="username" type="text" name="userName" required data-msg="请输入用户名"
+                                            placeholder="用户名" class="input-material">
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="password" type="password" name="passWord" required data-msg="请输入密码"
+                                            placeholder="密码" class="input-material">
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="userdesc" type="text" name="userDesc" required data-msg="用一句话介绍下自己吧"
+                                            placeholder="用一句话介绍下自己吧" class="input-material">
+                                    </div>
+                                    <!-- 提交按钮 form表单里的button标签和type微submit的input标签，自带提交功能，提交到表单地址-->
+                                    <!-- <button id="login" type="submit" class="btn btn-primary">登录</button> -->
+                                    <input id="login" type="button" class="btn btn-primary" value="注册">
+                                    <a id="regin" href="./login.html" class="btn btn-secondary">已有账号？快去登陆</a>
+
+
+                                    <!-- <div>
+                                        <div class="custom-control custom-checkbox " style="float: right;">
+                                            <input type="checkbox" class="custom-control-input" id="check2">
+                                            <label class="custom-control-label" for="check2">自动登录</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox " style="float: right;">
+                                            <input type="checkbox" class="custom-control-input" id="check1">
+                                            <label class="custom-control-label" for="check1">记住密码&nbsp;&nbsp;</label>
+                                        </div>
+                                    </div> -->
+                                    <p> <br /> <br /><a href="./index.html">返回首页</a></p>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#login").click(function (data) {
+            let userName = $("#username").val();
+            let userPassword = $("#password").val();
+            let userDesc = $("#userdesc").val();
+            let userImg = "http://localhost:3001/headimg" + (Math.floor(Math.random() * 11) + 2) + ".png";
+            let createTime = new Date().toLocaleString()
+            let data1 = { userName, userPassword, userDesc, userImg, createTime };
+            $.ajax({
+                url: "http://127.0.0.1:3001/api/addUser",
+                type: "post",
+                data: data1,
+                success: function (data2) {
+                    console.log(data2);
+                    if (data2 != "0") {
+                        data2 = JSON.parse(data2);
+                        localStorage.setItem('userImg', data2.headImg);
+                        localStorage.setItem('userId', data2.userId);
+                        localStorage.setItem("userName",data2.userName);
+                        location.href = "./index.html"
+                    } else {
+                        $('.alert').addClass('show');
+                        return false;
+                    }
+
+                   
+
+
+                   
+                }
+            })
+       
+
+        })
+    });
+</script>
+
+</html>

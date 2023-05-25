@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>蓝桥技术社区</title>
+    <meta data-n-head="ssr" charset="utf-8">
+    <link data-n-head="ssr" rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+    <meta data-n-head="ssr" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+    <meta data-n-head="ssr" data-hid="keywords" name="keywords" content="蓝桥云课,IT培训,IT教育,编程,在线编程,Linux,Linux教程,Linux操作系统,Python,Python教程,Python基础教程,Java,Java编程,C语言,大数据,Node.js,Hadoop,PHP,Docker,Git,R,SQL,MongoDB,Redis,Swift,Spark,在线实验,IT在线教育,编程入门,项目训练,项目实践,webIDE,软件开发">
+    <meta data-n-head="ssr" data-hid="description" name="description" itemprop="description" content="蓝桥云课是国内领先的IT在线编程及在线实训学习平台，专业导师提供精选的实践项目，创新的技术使得学习者无需配置繁琐的本地环境，随时在线流畅使用。以就业为导向，
+            提供编程、运维、测试、云计算、大数据、数据库等全面的IT技术动手实践环境，
+            提供Linux、Python、Java、C语言、Node.js、Hadoop、PHP、Docker、Git、
+            R、SQL、MongoDB、Redis、Swift、Spark等千门热门课程。">
+
+    <!-- 引入CSS文件 -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/highlight.min.css">
+    <link rel="stylesheet" href="../css/monokai_sublime.min.css">
+    <link rel="stylesheet" href="../css/editor.css">
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- 顶部内容   -->
+        <div class="top">
+            <!-- 类别选择  发布按钮 -->
+            <div class="public-wrap">
+                <div class="classify">
+                    <label>文章分类：</label>
+                    <select class="J_Classify form-select">
+                            <option value="前端" selected>前端</option>
+                            <option value="后端">后端</option>
+                            <option value="程序开发">程序开发</option>
+                            <option value="Andriod">Andriod</option>
+                            <option value="IOS">IOS</option>
+                            <option value="人工智能">人工智能</option>
+                            <option value="数据库">数据库</option>
+                    </select>
+                </div>
+                <div class="public">
+                    <a href="javascript:void(0);" class="public-btn J_Public">发布文章</a>
+                    <a href="javascript:void(0);" class="cancel J_Cancel">取消</a>
+                </div>
+            </div>
+            <!-- 文章标题 -->
+            <div class="title-wrap">
+                <!-- <label>文章标题</label> -->
+                <input type="text" name="title" placeholder="请输入文章标题" class="J_Title">
+            </div>
+        </div>
+         <!-- md编辑器 -->
+        <div class="row">
+            <!-- markdown编辑器div -->
+            <div class="col-md-6" id="md-editor">
+            </div>
+            <!-- markdown预览框div -->
+            <div class="col-md-6 J_Content" id="md-viewer">
+            </div>
+        </div>
+    </div>
+
+    <!-- 文章发布成功提示框 -->
+    <div class="modal J_Modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">温馨提示</h5>
+                </div>
+                <div class="modal-body">
+                    <p>文章发布成功！</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary J_PublicSuccess">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 文章发布失败的提示框 -->
+    <div class="modal J_Fail" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">温馨提示</h5>
+                </div>
+                <div class="modal-body">
+                    <p class="J_TipText">文章发布失败！</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary J_PublicFail">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 引入JavaScript文件 -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/ace.js"></script>
+    <script src="../js/marked.min.js"></script>
+    <script src="../js/highlight.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/editor.js"></script>
+    <script>
+        $(function() {
+            localStorage.removeItem("localData");
+
+            $(".J_Public").click(function() {
+                if ($(".J_Title").val() == "") {
+                    $(".J_TipText").text("请输入文章标题");
+                    $('.J_Fail').modal('show');
+                    return this;
+                }
+
+                if ($("#md-viewer").html() == "") {
+                    $(".J_TipText").text("请输入文章内容");
+                    $('.J_Fail').modal('show');
+                    return this;
+                }
+
+                let data1 = {
+                    title: $(".J_Title").val(),
+                    content: $("#md-viewer").html(),
+                    desc: $("#md-viewer").html().toString().substr(0, 110),
+                    author: localStorage.userName,
+                    authorId: localStorage.userId,
+                    classify: $(".J_Classify").val(),
+                    time:new Date().toLocaleString()
+                }
+       console.log(data1);
+                // addArticle(data);
+                $.ajax({
+                    url:"http://127.0.0.1:3001/api/addArticle",
+                    type:'post',
+                    data:data1,
+                    success:function(data2){
+                        console.log(data2);
+                       if(data2=="1"){
+                        // window.location.href = "./index.html";
+                        localStorage.removeItem("localData");
+                        $('.J_Modal').modal('show');
+                        return false;
+                       }else{
+                        $(".J_TipText").text("文章发布失败！");
+                         $('.J_Fail').modal('show');
+                        return false;
+                       }
+                    }
+                })
+
+
+
+            });
+
+            $(".J_PublicSuccess").click(function() {
+                window.location.href = "./index.html";
+            });
+
+            $(".J_PublicFail").click(function() {
+                $('.J_Fail').modal('hide');
+            });
+
+            $(".J_Cancel").click(function() {
+                window.location.href = "./index.html";
+            });
+
+
+        })
+    </script>
+</body>
+
+</html>

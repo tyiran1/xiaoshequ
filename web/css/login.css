@@ -1,0 +1,58 @@
+input {
+    outline: none;
+}
+
+input.input-material {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+}
+
+.login-page {
+    background-color: #f9f9f9;
+}
+
+.login-page .container {
+    min-height: 100vh;
+}
+
+.login-page .form-holder {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.login-page .form-holder .info,
+.login-page .form-holder .form {
+    min-height: 60vh;
+    padding: 40px;
+    height: 100%;
+}
+
+.login-page .form-holder .info {
+    /* background-image: #2e7eee;    */
+    background-image: url("../images/login-bg.jpg");
+    background-size: cover; 
+    color: #fff;
+    
+}
+
+.login-page .form-holder .form .form-group {
+    margin-bottom: 30px;
+}
+
+.login-page .form-holder .form .content {
+    width: 100%;
+}
+
+.login-page .form-holder .form #login,#regin {
+    margin-bottom: -40px;
+    cursor: pointer;
+}
+
+@media (max-width: 990px) {
+    .login-page .info,
+    .login-page .form {
+        min-height: auto !important;
+    }
+}

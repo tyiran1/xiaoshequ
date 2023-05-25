@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>蓝桥技术社区</title>
+    <meta data-n-head="ssr" charset="utf-8">
+    <link data-n-head="ssr" rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+    <meta data-n-head="ssr" name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+    <meta data-n-head="ssr" data-hid="keywords" name="keywords"
+        content="蓝桥云课,IT培训,IT教育,编程,在线编程,Linux,Linux教程,Linux操作系统,Python,Python教程,Python基础教程,Java,Java编程,C语言,大数据,Node.js,Hadoop,PHP,Docker,Git,R,SQL,MongoDB,Redis,Swift,Spark,在线实验,IT在线教育,编程入门,项目训练,项目实践,webIDE,软件开发">
+    <meta data-n-head="ssr" data-hid="description" name="description" itemprop="description" content="蓝桥云课是国内领先的IT在线编程及在线实训学习平台，专业导师提供精选的实践项目，创新的技术使得学习者无需配置繁琐的本地环境，随时在线流畅使用。以就业为导向，
+        提供编程、运维、测试、云计算、大数据、数据库等全面的IT技术动手实践环境，
+        提供Linux、Python、Java、C语言、Node.js、Hadoop、PHP、Docker、Git、
+        R、SQL、MongoDB、Redis、Swift、Spark等千门热门课程。">
+    <link href="../iconfont/iconfont.css" rel="stylesheet" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/index.css" rel="stylesheet" />
+    <link href="../css/admin.css" rel="stylesheet" />
+
+</head>
+<header id="header" class="navbar navbar-default fixed-top"></header>
+<section class="home container">
+    <div class="row">
+        <div class="col-md-8 home-left">
+            <div class="main-top">
+
+                <a class="avatar" href="javascript:void(0);">
+                    <img class="J_HeadImg" src="../images/default.jpg" alt="240">
+                </a>
+
+                <div class="title">
+                    <a class="name J_Name" href="javascript:void(0);">11</a>
+                </div>
+                <div class="info J_Desc">22</div>
+            </div>
+
+            <ul class="trigger-menu list-unstyled">
+                <li class="active">
+                    <a href="javascript:void(0);"> 文章</a>
+                    <hr>
+                </li>
+            </ul>
+
+            <div class="list J_List">
+                <!-- <div>
+                    <a></a>
+                </div> -->
+            </div>
+        </div>
+        <div class="col-md-11 col-lg-4 home-right aside">
+            <div class="recommend">
+                <a href="javascript:void(0);"><img src="../images/rightbanner.jpg" alt=""></a>
+            </div>
+
+            <ul class="list user-dynamic">
+                <li>
+                    <a href="javascript:void(0);">
+                        <span>我关注的专题/文集/连载</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">
+                        <span>我喜欢的文章</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</section>
+
+<div class="modal J_Modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">温馨提示</h5>
+            </div>
+            <div class="modal-body">
+                <p class="J_DeleteText">文章删除成功！</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary J_DeleteSuccess">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal J_Confirm" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">温馨提示</h5>
+            </div>
+            <div class="modal-body">
+                <p class="">确定要删除该文章吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary J_DeleteConfirm J_DeleteSuccess">确定</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../js/common.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script>
+    $(function () {
+        $("#header").load("./header.html", function () {
+            searchinput();
+        });
+        // $("#header").load("/header", function() {
+        //     headinit();
+        // });
+
+        // loadMyInfo();
+        // loadMyArticleList();
+        // loadauthorschange();
+
+        // 从缓存里取出当前登陆的用户id
+        let userId = localStorage.getItem('userId');
+        let userName=localStorage.getItem('userName');
+        let userImg = localStorage.getItem('userImg');
+        let userDesc=localStorage.getItem('userDesc');
+        // 用户信息
+        $('.J_HeadImg').attr('src',userImg);
+        $('.J_Name').html(userName);
+        $('.J_Desc').html(userDesc);
+
+  
+        loadMyArticleList(userId)
+        // 获取当前用户的文章信息
+        function loadMyArticleList(userid) {
+            $.ajax({
+                url: "http://localhost:3001/api/myArticleList/" + userid,
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                 
+                    if (data == "0") {
+                        $(".J_List").html('您还没有发布文章，赶紧去发布吧！！！');
+                        return false;
+                    }
+                    $(".J_List").html('');
+                    let str=""
+                    $.each(data, function (i, data) {
+                        str+=
+                        $(".J_List").append(`<div class="list-item">
+        <div class="list-info">
+            <a href="./blog.html?id=${data.id}" class='title'>${data.title}</a>
+            <p class='desc text-secondary'>${data.descs}</p>
+            <a class="text-primary">更新</a>
+            <a data=${data.id} class="text-danger del">删除</a>
+        </div>
+    </div>`);
+                    });
+                }
+            })
+        }
+         // 页面已经存在的元素 事件委托
+        $('.J_List').on('click','.del',function(){
+           
+            let id=$(this).attr('data');
+            del(id)
+        })
+        // 删除文章
+        function del(id) {
+            $.ajax({
+                url: "http://127.0.0.1:3001/api/deleteArticle/" + id,
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+              
+                    if (data == "1") {
+                        $('.J_Modal').modal('show');
+                    }
+                }
+            })
+        }
+
+        $(".J_DeleteSuccess").click(function () {
+            window.location.reload();
+        });
+
+        // $(".change").click(function () {
+        //     loadauthorschange();
+        // })
+
+    })
+</script>
+
+</html>
